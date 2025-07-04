@@ -2,10 +2,11 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import * as argon2 from 'argon2';
 import { nanoid } from 'nanoid';
 import { UserRepository } from '../repositories/user.repository';
-import { CreateUserRequestDto } from '../dto/create-user-request.dto';
+import { SignupRequestDto } from '../dto/signup-request.dto';
 import { UserEmailVerificationRepository } from '../repositories/user-email-verificarion.repository';
 import { EmailSenderService } from '../../../infrastructure/email/services/email-sender.service';
 import { EmailContentService } from '../../../infrastructure/email/services/email-content.service';
+import { SignupResponse } from '../types/signup-type';
 
 @Injectable()
 export class SignupService {
@@ -16,7 +17,7 @@ export class SignupService {
     private readonly emailContentService: EmailContentService,
   ) {}
 
-  async signup(dto: CreateUserRequestDto) {
+  async signup(dto: SignupRequestDto): Promise<SignupResponse> {
     const { email, password, firstName } = dto;
 
     const user = await this.userRepository.findByEmail(email);

@@ -17,7 +17,7 @@ export class SignupService {
     private readonly emailContentService: EmailContentService,
   ) {}
 
-  async signup(dto: SignupRequestDto): Promise<SignupResponse> {
+  async execute(dto: SignupRequestDto): Promise<SignupResponse> {
     const { email, password, firstName } = dto;
 
     const user = await this.userRepository.findByEmail(email);

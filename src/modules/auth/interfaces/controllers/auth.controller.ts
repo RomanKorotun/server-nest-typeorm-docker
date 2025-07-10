@@ -1,9 +1,9 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { SignupService } from './services/signup.service';
-import { SignupRequestDto } from './dto/signup-request.dto';
+import { SignupService } from '../../application/use-cases/signup/signup.service';
 import { ApiTags } from '@nestjs/swagger';
-import { SignupSwagger } from './swagger/signup-swagger';
-import { SignupResponse } from './types/signup-type';
+import { SignupSwagger } from '../swagger/signup-swagger';
+import { SignupRequestDto } from '../dto/signup-request.dto';
+import { SignupResponse } from '../../application/use-cases/signup/types/signup-response.type';
 
 @ApiTags('auth')
 @Controller('auth')

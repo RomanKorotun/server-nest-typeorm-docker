@@ -15,10 +15,10 @@ export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'first_name', type: 'varchar', length: 125 })
+  @Column({ name: 'first_name', type: 'varchar', length: 250 })
   firstName: string;
 
-  @Column({ name: 'last_name', type: 'varchar', length: 125 })
+  @Column({ name: 'last_name', type: 'varchar', length: 250 })
   lastName: string;
 
   @Column({ type: 'varchar', length: 125 })

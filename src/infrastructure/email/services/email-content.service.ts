@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class EmailContentService {
+export class EmailVerificationService {
   constructor(private readonly configService: ConfigService) {}
   createConfirmEmail(to: string, firstName: string, verificationCode: string) {
     const BACKEND_URL = this.configService.getOrThrow<string>('BACKEND_URL');

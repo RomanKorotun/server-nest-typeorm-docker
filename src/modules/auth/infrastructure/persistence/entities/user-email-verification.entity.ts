@@ -20,12 +20,12 @@ export class UserEmailVerificationEntity {
   isEmailConfirmed: boolean;
 
   @Column({
-    name: 'email_verification_code',
+    name: 'verification_code',
     type: 'varchar',
     length: 65,
     nullable: true,
   })
-  emailVerificationCode: string | null;
+  verificationCode: string | null;
 
   @Column({ name: 'user_id' })
   userId: string;

@@ -1,10 +1,10 @@
 import { MailerModule } from '@nestjs-modules/mailer';
 import { Global, Module } from '@nestjs/common';
-import { AppConfigModule } from '../config/config.module';
 import { ConfigService } from '@nestjs/config';
+import { AppConfigModule } from '../config/config.module';
 import { mailerConfig } from '../../configs/mailer.config';
 import { EmailSenderService } from './services/email-sender.service';
-import { EmailVerificationService } from './services/email-content.service';
+import { EmailContentService } from './services/email-content.service';
 
 @Global()
 @Module({
@@ -15,7 +15,7 @@ import { EmailVerificationService } from './services/email-content.service';
       useFactory: mailerConfig,
     }),
   ],
-  providers: [EmailSenderService, EmailVerificationService],
-  exports: [EmailSenderService, EmailVerificationService],
+  providers: [EmailSenderService, EmailContentService],
+  exports: [EmailSenderService, EmailContentService],
 })
 export class EmailModule {}

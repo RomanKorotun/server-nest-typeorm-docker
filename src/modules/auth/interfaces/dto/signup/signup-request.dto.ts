@@ -43,7 +43,7 @@ export class SignupRequestDto {
 
   @ApiProperty({
     description: 'Email користувача',
-    example: 'romna@ukr.net',
+    example: 'roman@ukr.net',
   })
   @IsNotEmpty({ message: 'Поле email не може бути пустим' })
   @IsEmail({}, { message: 'Поле email містить не вірний формат' })

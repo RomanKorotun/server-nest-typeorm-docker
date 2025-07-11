@@ -1,10 +1,10 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
-import { SignupRequestDto } from '../../../interfaces/dto/signup-request.dto';
+import { SignupRequestDto } from '../../../interfaces/dto/signup/signup-request.dto';
 import { EmailSenderService } from '../../../../../infrastructure/email/services/email-sender.service';
-import { EmailVerificationService } from '../../../../../infrastructure/email/services/email-content.service';
+import { EmailContentService } from '../../../../../infrastructure/email/services/email-content.service';
 import { IUserRepository } from '../../../domain/repositories/user.repository';
-import { IUserEmailVerificationRepository } from '../../../domain/repositories/user-email.verification.repository';
-import { SignupResponse } from './types/signup-response.type';
+import { IUserEmailVerificationRepository } from '../../../domain/repositories/user-email-verification.repository';
+import { SignupResponse } from './signup-response.type';
 import { IPasswordHash } from '../../contracts/password-hasher.interface';
 import { ICodeGenerator } from '../../../../../shared/code-generator/code-generator.interface';
 
@@ -20,7 +20,7 @@ export class SignupService {
     @Inject('ICodeGenerator')
     private readonly codeGeneratorService: ICodeGenerator,
     private readonly emailSenderService: EmailSenderService,
-    private readonly emailContentService: EmailVerificationService,
+    private readonly emailContentService: EmailContentService,
   ) {}
 
   async execute(dto: SignupRequestDto): Promise<SignupResponse> {
@@ -49,7 +49,7 @@ export class SignupService {
     );
 
     const registerEmail = this.emailContentService.createConfirmEmail(
-      'soxadi4082@binafex.com',
+      'negay58927@coderdir.com',
       firstName,
       verificationCode,
     );

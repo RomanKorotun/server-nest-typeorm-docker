@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../persistence/entities/user.entity';
 import { Repository } from 'typeorm';
-import { SignupRequestDto } from '../../interfaces/dto/signup-request.dto';
+import { SignupRequestDto } from '../../interfaces/dto/signup/signup-request.dto';
 import { IUserRepository } from '../../domain/repositories/user.repository';
 import { DomainUser } from '../../domain/entities/user';
 

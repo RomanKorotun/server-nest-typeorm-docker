@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ICodeGenerator } from './code-generator.interface';
 import { nanoid } from 'nanoid';
+import { ICodeGenerator } from './code-generator.interface';
 
 @Injectable()
 export class CodeGeneratorService implements ICodeGenerator {

@@ -6,4 +6,10 @@ export interface IUserEmailVerificationRepository {
     user: DomainUser,
     verificationCode: string,
   ): Promise<DomainUserEmailVerification>;
+  findByVerificationCode(
+    verificationCode: string,
+  ): Promise<DomainUserEmailVerification | null>;
+  confirmEmailByVerificationCode(
+    verification: DomainUserEmailVerification,
+  ): Promise<void>;
 }

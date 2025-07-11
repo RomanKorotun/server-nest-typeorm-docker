@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEmailVerificationEntity } from '../persistence/entities/user-email-verification.entity';
 import { Repository } from 'typeorm';
-import { IUserEmailVerificationRepository } from '../../domain/repositories/user-email.verification.repository';
+import { IUserEmailVerificationRepository } from '../../domain/repositories/user-email-verification.repository';
 import { DomainUserEmailVerification } from '../../domain/entities/user-email-verification';
 import { DomainUser } from '../../domain/entities/user';
 import { UserEntity } from '../persistence/entities/user.entity';
@@ -34,12 +34,44 @@ export class UserEmailVerificationRepository
     verificationCode: string,
   ): Promise<DomainUserEmailVerification> {
     const userEntity = new UserEntity();
+
     userEntity.id = user.getId();
+
     const verification = this.userEmailVerifacationRepo.create({
-      verificationCode: verificationCode,
+      verificationCode,
       user: userEntity,
     });
+
     const saved = await this.userEmailVerifacationRepo.save(verification);
+
     return this.mapToDomain(saved);
+  }
+
+  async findByVerificationCode(
+    verificationCode: string,
+  ): Promise<DomainUserEmailVerification | null> {
+    const verification = await this.userEmailVerifacationRepo.findOne({
+      where: { verificationCode },
+    });
+
+    if (!verification) {
+      return null;
+    }
+
+    return this.mapToDomain(verification);
+  }
+
+  async confirmEmailByVerificationCode(
+    verification: DomainUserEmailVerification,
+  ): Promise<void> {
+    const entity = this.userEmailVerifacationRepo.create({
+      id: verification.getId(),
+      isEmailConfirmed: verification.getIsEmailConfirmed(),
+      verificationCode: verification.getVerificationCode(),
+      userId: verification.getUserId(),
+      createdAt: verification.getCreatedAt(),
+      updatedAt: verification.getUpdatedAt(),
+    });
+    await this.userEmailVerifacationRepo.save(entity);
   }
 }

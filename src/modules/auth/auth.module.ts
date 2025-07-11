@@ -8,6 +8,7 @@ import { SignupService } from './application/use-cases/signup/signup.service';
 import { AuthController } from './interfaces/controllers/auth.controller';
 import { PasswordHashService } from './application/services/password-hasher.service';
 import { CodeGeneratorModule } from '../../shared/code-generator/code-generator.module';
+import { ConfirmEmailService } from './application/use-cases/confirm-email/confirm-email.service';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { CodeGeneratorModule } from '../../shared/code-generator/code-generator.
       provide: 'IPasswordHash',
       useClass: PasswordHashService,
     },
+    ConfirmEmailService,
   ],
 })
 export class AuthModule {}

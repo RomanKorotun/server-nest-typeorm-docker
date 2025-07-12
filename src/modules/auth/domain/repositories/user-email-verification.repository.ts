@@ -9,6 +9,7 @@ export interface IUserEmailVerificationRepository {
   findByVerificationCode(
     verificationCode: string,
   ): Promise<DomainUserEmailVerification | null>;
+  findByUserId(userId: string): Promise<DomainUserEmailVerification | null>;
   confirmEmailByVerificationCode(
     verification: DomainUserEmailVerification,
   ): Promise<void>;

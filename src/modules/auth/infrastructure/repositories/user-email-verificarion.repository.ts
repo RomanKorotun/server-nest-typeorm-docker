@@ -61,6 +61,20 @@ export class UserEmailVerificationRepository
     return this.mapToDomain(verification);
   }
 
+  async findByUserId(
+    userId: string,
+  ): Promise<DomainUserEmailVerification | null> {
+    const verification = await this.userEmailVerifacationRepo.findOne({
+      where: { userId },
+    });
+
+    if (!verification) {
+      return null;
+    }
+
+    return this.mapToDomain(verification);
+  }
+
   async confirmEmailByVerificationCode(
     verification: DomainUserEmailVerification,
   ): Promise<void> {

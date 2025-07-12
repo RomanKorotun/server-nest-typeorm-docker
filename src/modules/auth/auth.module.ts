@@ -9,6 +9,7 @@ import { AuthController } from './interfaces/controllers/auth.controller';
 import { PasswordHashService } from './application/services/password-hasher.service';
 import { CodeGeneratorModule } from '../../shared/code-generator/code-generator.module';
 import { ConfirmEmailService } from './application/use-cases/confirm-email/confirm-email.service';
+import { ResendConfirmEmailService } from './application/use-cases/resend-confirm-email/resend-confirm-email.service';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ConfirmEmailService } from './application/use-cases/confirm-email/confi
       useClass: PasswordHashService,
     },
     ConfirmEmailService,
+    ResendConfirmEmailService,
   ],
 })
 export class AuthModule {}

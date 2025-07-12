@@ -12,4 +12,12 @@ export class DomainUser {
   getId(): string {
     return this.id;
   }
+
+  getFirstName() {
+    return this.firstName;
+  }
+
+  getEmail() {
+    return this.email;
+  }
 }

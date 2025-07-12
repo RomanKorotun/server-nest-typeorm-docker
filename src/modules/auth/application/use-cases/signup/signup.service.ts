@@ -48,13 +48,13 @@ export class SignupService {
       verificationCode,
     );
 
-    const registerEmail = this.emailContentService.createConfirmEmail(
-      'negay58927@coderdir.com',
+    const confirmationEmail = this.emailContentService.createConfirmEmail(
+      email,
       firstName,
       verificationCode,
     );
 
-    await this.emailSenderService.sendEmail(registerEmail);
+    await this.emailSenderService.sendEmail(confirmationEmail);
 
     return {
       message:

@@ -14,6 +14,8 @@ import { SignupRequestDto } from '../dto/signup/signup-request.dto';
 import { SignupResponse } from '../../application/use-cases/signup/signup-response.type';
 import { ConfirmEmailService } from '../../application/use-cases/confirm-email/confirm-email.service';
 import { ConfirmEmailSwagger } from '../swagger/confirm-email-swagger';
+import { ResendConfirmEmailRequestDto } from '../dto/resend-confirm-email/resend-confirm-email-request.dto';
+import { ResendConfirmEmailService } from '../../application/use-cases/resend-confirm-email/resend-confirm-email.service';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -21,6 +23,7 @@ export class AuthController {
   constructor(
     private readonly signupService: SignupService,
     private readonly confirmEmailService: ConfirmEmailService,
+    private readonly resendConfirmEmailService: ResendConfirmEmailService,
   ) {}
 
   @SignupSwagger()
@@ -35,5 +38,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async confirmEmail(@Param('verificationCode') verificationCode: string) {
     return await this.confirmEmailService.execute(verificationCode);
+  }
+
+  @Post('confirm-email/resend')
+  @HttpCode(HttpStatus.OK)
+  async resendConfirmEmail(@Body() dto: ResendConfirmEmailRequestDto) {
+    return await this.resendConfirmEmailService.execute(dto);
   }
 }

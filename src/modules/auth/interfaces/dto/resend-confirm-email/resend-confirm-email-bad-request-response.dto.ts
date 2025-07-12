@@ -1,21 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class SignupBadRequestResponseDto {
+export class ResendConfirmEmailBadRequestResponseDto {
   @ApiProperty({ description: 'HTTP статус відповіді', example: 400 })
   status: number;
 
   @ApiProperty({
     description: 'Текст помилки',
-    example: [
-      'Поле password повинно містити мінімум 6 символів, принаймні одну цифру та одну велику літеру',
-      'Поле password не може бути порожнім',
-    ],
+    example: 'Користувач уже підтвердив електронну адресу',
   })
-  message: string[];
+  message: string;
 
   @ApiProperty({
     description: 'URL, на який був зроблений запит',
-    example: '/api/auth/signup',
+    example: '/api/auth/confirm-email/resend',
   })
   url: string;
 

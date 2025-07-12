@@ -1,18 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ConfirmEmailNotFoundResponseDto {
+export class ResendConfirmEmailNotFoundResponseDto {
   @ApiProperty({ description: 'HTTP статус відповіді', example: 404 })
   status: number;
 
   @ApiProperty({
     description: 'Текст помилки',
-    example: 'Підтвердження не вдалося. Недійсне або вже використане посилання',
+    example: 'Користувача не знайдено',
   })
   message: string;
 
   @ApiProperty({
     description: 'URL, на який був зроблений запит',
-    example: '/api/auth/confirm-email/Zm1Ryu_O1Yc6qIHQl57fj',
+    example: '/api/auth/confirm-email/resend',
   })
   url: string;
 

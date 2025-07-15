@@ -33,6 +33,14 @@ export class UserRepository implements IUserRepository {
     return this.mapToDomain(user);
   }
 
+  async findById(id: string): Promise<DomainUser | null> {
+    const user = await this.userRepo.findOne({ where: { id } });
+    if (!user) {
+      return null;
+    }
+    return this.mapToDomain(user);
+  }
+
   async createUser(props: CreateUserProps): Promise<DomainUser> {
     const user = this.userRepo.create(props);
     const saved = await this.userRepo.save(user);

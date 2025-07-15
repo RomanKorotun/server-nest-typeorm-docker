@@ -3,7 +3,7 @@ import { SignupRequestDto } from '../../../interfaces/dto/signup/signup-request.
 import { IUserRepository } from '../../../domain/repositories/user.repository';
 import { IUserEmailVerificationRepository } from '../../../domain/repositories/user-email-verification.repository';
 import { SignupResponse } from './signup-response.interface';
-import { ICodeGenerator } from '../../../../../shared/code-generator/code-generator.interface';
+import { ICodeGenerator } from '../../../../../application/contracts/code-generator.interface';
 import { IEmailContent } from '../../../../../application/contracts/email-content.interface';
 import { IEmailSender } from '../../../../../application/contracts/email-sender.interface';
 import { IPasswordHashService } from '../../contracts/password-hash-service.interface';

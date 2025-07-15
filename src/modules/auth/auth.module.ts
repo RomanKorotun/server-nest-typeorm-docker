@@ -4,7 +4,7 @@ import { UserEntity } from './infrastructure/persistence/entities/user.entity';
 import { UserEmailVerificationEntity } from './infrastructure/persistence/entities/user-email-verification.entity';
 import { SignupService } from './application/use-cases/signup/signup.service';
 import { AuthController } from './interfaces/controllers/auth.controller';
-import { CodeGeneratorModule } from '../../shared/code-generator/code-generator.module';
+import { CodeGeneratorModule } from '../../infrastructure/code-generator/code-generator.module';
 import { ConfirmEmailService } from './application/use-cases/confirm-email/confirm-email.service';
 import { ResendConfirmEmailService } from './application/use-cases/resend-confirm-email/resend-confirm-email.service';
 import { SigninService } from './application/use-cases/signin/signin.service';

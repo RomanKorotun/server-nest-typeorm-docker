@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { SignupService } from '../../application/use-cases/signup/signup.service';
@@ -22,6 +23,9 @@ import { SigninRequestDto } from '../dto/signin/signin-request.dto';
 import { SigninService } from '../../application/use-cases/signin/signin.service';
 import { Response } from 'express';
 import { SigninSwagger } from '../swagger/signin.swagger';
+import { CurrentUser } from '../../decorators/current-user.decorator';
+import { DomainUser } from '../../domain/entities/user';
+import { JwtAccessGuard } from '../../../../common/guards/jwt-access.guard';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -62,5 +66,12 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     return this.signinService.execute(dto, res);
+  }
+
+  @UseGuards(JwtAccessGuard)
+  @Get('current')
+  @HttpCode(HttpStatus.OK)
+  current(@CurrentUser() user: DomainUser) {
+    return user;
   }
 }

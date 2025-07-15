@@ -15,7 +15,10 @@ import { EmailContentService } from './services/email-content.service';
       useFactory: mailerConfig,
     }),
   ],
-  providers: [EmailSenderService, EmailContentService],
-  exports: [EmailSenderService, EmailContentService],
+  providers: [
+    { provide: 'IEmailSender', useClass: EmailSenderService },
+    { provide: 'IEmailContent', useClass: EmailContentService },
+  ],
+  exports: ['IEmailSender', 'IEmailContent'],
 })
 export class EmailModule {}

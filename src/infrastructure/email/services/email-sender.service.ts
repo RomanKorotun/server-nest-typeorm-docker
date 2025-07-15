@@ -1,18 +1,17 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { MailerService, ISendMailOptions } from '@nestjs-modules/mailer';
+import { MailerService } from '@nestjs-modules/mailer';
 import fs from 'fs/promises';
 import path from 'path';
 import Handlebars from 'handlebars';
 import mjml2html from 'mjml';
 import { SentMessageInfo } from 'nodemailer';
-
-interface EmailOptions extends ISendMailOptions {
-  template?: string;
-  context?: any;
-}
+import {
+  EmailOptions,
+  IEmailSender,
+} from '../../../application/contracts/email-sender.interface';
 
 @Injectable()
-export class EmailSenderService {
+export class EmailSenderService implements IEmailSender {
   constructor(private readonly mailerService: MailerService) {}
 
   async sendEmail(options: EmailOptions): Promise<SentMessageInfo> {

@@ -1,12 +1,12 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { SignupRequestDto } from '../../../interfaces/dto/signup/signup-request.dto';
-import { EmailSenderService } from '../../../../../infrastructure/email/services/email-sender.service';
-import { EmailContentService } from '../../../../../infrastructure/email/services/email-content.service';
 import { IUserRepository } from '../../../domain/repositories/user.repository';
 import { IUserEmailVerificationRepository } from '../../../domain/repositories/user-email-verification.repository';
-import { SignupResponse } from './signup-response.type';
-import { IPasswordHash } from '../../contracts/password-hasher.interface';
+import { SignupResponse } from './signup-response.interface';
 import { ICodeGenerator } from '../../../../../shared/code-generator/code-generator.interface';
+import { IEmailContent } from '../../../../../application/contracts/email-content.interface';
+import { IEmailSender } from '../../../../../application/contracts/email-sender.interface';
+import { IPasswordHashService } from '../../contracts/password-hash-service.interface';
 
 @Injectable()
 export class SignupService {
@@ -15,12 +15,14 @@ export class SignupService {
     private readonly userRepository: IUserRepository,
     @Inject('IUserEmailVerificationRepository')
     private readonly userEmailVerificationRepository: IUserEmailVerificationRepository,
-    @Inject('IPasswordHash')
-    private readonly passwordHashService: IPasswordHash,
+    @Inject('IPasswordHashService')
+    private readonly passwordHashService: IPasswordHashService,
     @Inject('ICodeGenerator')
     private readonly codeGeneratorService: ICodeGenerator,
-    private readonly emailSenderService: EmailSenderService,
-    private readonly emailContentService: EmailContentService,
+    @Inject('IEmailContent')
+    private readonly emailContentService: IEmailContent,
+    @Inject('IEmailSender')
+    private readonly emailSenderService: IEmailSender,
   ) {}
 
   async execute(dto: SignupRequestDto): Promise<SignupResponse> {

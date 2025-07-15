@@ -20,4 +20,8 @@ export class DomainUser {
   getEmail() {
     return this.email;
   }
+
+  getPassword() {
+    return this.password;
+  }
 }

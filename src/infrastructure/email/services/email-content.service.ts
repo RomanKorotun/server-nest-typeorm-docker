@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { IEmailContent } from '../../../application/contracts/email-content.interface';
 
 @Injectable()
-export class EmailContentService {
+export class EmailContentService implements IEmailContent {
   constructor(private readonly configService: ConfigService) {}
 
   createConfirmEmail(to: string, firstName: string, verificationCode: string) {

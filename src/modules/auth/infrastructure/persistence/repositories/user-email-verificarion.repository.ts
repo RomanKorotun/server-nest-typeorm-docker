@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEmailVerificationEntity } from '../persistence/entities/user-email-verification.entity';
+import { UserEmailVerificationEntity } from '../../persistence/entities/user-email-verification.entity';
 import { Repository } from 'typeorm';
-import { IUserEmailVerificationRepository } from '../../domain/repositories/user-email-verification.repository';
-import { DomainUserEmailVerification } from '../../domain/entities/user-email-verification';
-import { DomainUser } from '../../domain/entities/user';
-import { UserEntity } from '../persistence/entities/user.entity';
+import { IUserEmailVerificationRepository } from '../../../domain/repositories/user-email-verification.repository';
+import { DomainUserEmailVerification } from '../../../domain/entities/user-email-verification';
+import { DomainUser } from '../../../domain/entities/user';
+import { UserEntity } from '../../persistence/entities/user.entity';
 
 @Injectable()
 export class UserEmailVerificationRepository

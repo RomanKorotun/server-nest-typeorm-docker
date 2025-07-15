@@ -7,9 +7,9 @@ import {
 import { IUserRepository } from '../../../../../modules/auth/domain/repositories/user.repository';
 import { ResendConfirmEmailRequestDto } from '../../../../../modules/auth/interfaces/dto/resend-confirm-email/resend-confirm-email-request.dto';
 import { IUserEmailVerificationRepository } from '../../../../../modules/auth/domain/repositories/user-email-verification.repository';
-import { EmailContentService } from '../../../../../infrastructure/email/services/email-content.service';
-import { EmailSenderService } from '../../../../../infrastructure/email/services/email-sender.service';
-import { ResendConfirmEmailResponse } from './resend-confirm-email-response.type';
+import { ResendConfirmEmailResponse } from './resend-confirm-email-response.interface';
+import { IEmailContent } from '../../../../../application/contracts/email-content.interface';
+import { IEmailSender } from '../../../../../application/contracts/email-sender.interface';
 
 @Injectable()
 export class ResendConfirmEmailService {
@@ -17,8 +17,10 @@ export class ResendConfirmEmailService {
     @Inject('IUserRepository') private readonly userRepository: IUserRepository,
     @Inject('IUserEmailVerificationRepository')
     private readonly userEmailVerificationRepository: IUserEmailVerificationRepository,
-    private readonly emailContentService: EmailContentService,
-    private readonly emailSenderService: EmailSenderService,
+    @Inject('IEmailContent')
+    private readonly emailContentService: IEmailContent,
+    @Inject('IEmailSender')
+    private readonly emailSenderService: IEmailSender,
   ) {}
 
   async execute(

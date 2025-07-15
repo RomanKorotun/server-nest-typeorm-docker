@@ -1,7 +1,7 @@
 import { DomainUser } from '../entities/user';
-import { CreateUserInput } from '../types/create-user.input';
+import { CreateUserProps } from '../types/create-user.props';
 
 export interface IUserRepository {
   findByEmail(email: string): Promise<DomainUser | null>;
-  createUser(input: CreateUserInput): Promise<DomainUser>;
+  createUser(props: CreateUserProps): Promise<DomainUser>;
 }

@@ -6,23 +6,28 @@ import {
   HttpStatus,
   Param,
   Post,
+  Res,
 } from '@nestjs/common';
-import { SignupService } from '../../application/use-cases/signup/signup.service';
 import { ApiTags } from '@nestjs/swagger';
+import { SignupService } from '../../application/use-cases/signup/signup.service';
 import { SignupSwagger } from '../swagger/signup.swagger';
 import { SignupRequestDto } from '../dto/signup/signup-request.dto';
-import { SignupResponse } from '../../application/use-cases/signup/signup-response.type';
+import { SignupResponse } from '../../application/use-cases/signup/signup-response.interface';
 import { ConfirmEmailService } from '../../application/use-cases/confirm-email/confirm-email.service';
 import { ConfirmEmailSwagger } from '../swagger/confirm-email.swagger';
 import { ResendConfirmEmailRequestDto } from '../dto/resend-confirm-email/resend-confirm-email-request.dto';
 import { ResendConfirmEmailService } from '../../application/use-cases/resend-confirm-email/resend-confirm-email.service';
 import { ResendConfirmEmailSwagger } from '../swagger/resend-confirm-email.swagger';
+import { SigninRequestDto } from '../dto/signin/signin-request.dto';
+import { SigninService } from '../../application/use-cases/signin/signin.service';
+import { Response } from 'express';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly signupService: SignupService,
+    private readonly signinService: SigninService,
     private readonly confirmEmailService: ConfirmEmailService,
     private readonly resendConfirmEmailService: ResendConfirmEmailService,
   ) {}
@@ -46,5 +51,14 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async resendConfirmEmail(@Body() dto: ResendConfirmEmailRequestDto) {
     return await this.resendConfirmEmailService.execute(dto);
+  }
+
+  @Post('signin')
+  @HttpCode(HttpStatus.OK)
+  async signin(
+    @Body() dto: SigninRequestDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return this.signinService.execute(dto, res);
   }
 }

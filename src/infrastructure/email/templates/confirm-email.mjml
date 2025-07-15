@@ -52,6 +52,87 @@
           Після підтвердження ви зможете додавати фільми до своєї колекції. Ви
           також зможете переглядати список своїх фільмів у зручному форматі!
         </mj-text>
+
+        <mj-text font-size="14px" color="#999999" padding-top="10px">
+          Якщо ви не реєструвалися на <strong>TestNest</strong>, просто
+          ігноруйте цей лист — жодних дій з вашого боку не потрібно.
+        </mj-text>
+
+        <mj-text font-size="14px" color="#999999" padding-top="10px">
+          Маєте запитання або потребуєте допомоги?<br />
+          Напишіть нам на
+          <a
+            href="mailto:roman.korotun@ukr.net"
+            style="color: #346df1; text-decoration: none"
+            >roman.korotun@ukr.net</a
+          >
+          — ми завжди раді допомогти!
+        </mj-text>
+
+        <mj-divider border-color="#eaeaea" padding-top="20px" />
+        <mj-text font-size="14px" color="#999999">
+          З найкращими побажаннями,<br />
+          Команда TestNest
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
+
+<!-- <mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Arial, sans-serif" />
+      <mj-button
+        background-color="#346df1"
+        color="white"
+        border-radius="6px"
+        font-weight="bold"
+      />
+    </mj-attributes>
+    <mj-style inline="inline">
+      @media only screen and (max-width: 480px) {
+        .title-text {
+          font-size: 22px !important;
+          color: #ff0000 !important;
+        }
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f4f4f7">
+    <mj-section background-color="#ffffff" border-radius="6px" padding="20px">
+      <mj-column>
+        <mj-image
+          width="80px"
+          src="https://mjml.io/assets/img/logo-small.png"
+          alt="TestNest Логотип"
+        />
+        <mj-divider border-color="#eaeaea" />
+        <mj-text
+          css-class="title-text"
+          font-size="20px"
+          font-weight="bold"
+          color="#333333"
+        >
+          Привіт, {{ name }}!
+        </mj-text>
+        <mj-text font-size="16px" color="#555555" line-height="24px">
+          Дякуємо, що приєдналися до <strong>TestNest</strong> — платформи для
+          створення власної колекції фільмів. Щоб завершити реєстрацію,
+          натисніть кнопку нижче для підтвердження вашої електронної адреси.
+        </mj-text>
+        <mj-button href="{{confirmationLink}}">
+          Підтвердити електронну адресу
+        </mj-button>
+        <mj-text
+          font-size="16px"
+          color="#555555"
+          line-height="24px"
+          padding-top="20px"
+        >
+          Після підтвердження ви зможете додавати фільми до своєї колекції. Ви
+          також зможете переглядати список своїх фільмів у зручному форматі!
+        </mj-text>
         <mj-text font-size="14px" color="#999999" padding-top="10px">
           Маєте запитання або потребуєте допомоги?<br />
           Напишіть нам на
@@ -70,4 +151,4 @@
       </mj-column>
     </mj-section>
   </mj-body>
-</mjml>
+</mjml> -->

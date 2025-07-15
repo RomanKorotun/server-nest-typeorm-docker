@@ -7,6 +7,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { PASSWORD_REGEX } from '../../../../../common/constants/regex.constants';
 
 export class SignupRequestDto {
   @ApiProperty({
@@ -54,7 +55,7 @@ export class SignupRequestDto {
     example: 'R123456',
   })
   @IsNotEmpty({ message: 'Поле password не може бути порожнім' })
-  @Matches(/^(?=.*[A-Z])(?=.*\d).{6,}$/, {
+  @Matches(PASSWORD_REGEX, {
     message:
       'Поле password повинно містити мінімум 6 символів, принаймні одну цифру та одну велику літеру',
   })

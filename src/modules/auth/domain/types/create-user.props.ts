@@ -1,4 +1,4 @@
-export type CreateUserInput = {
+export type CreateUserProps = {
   email: string;
   password: string;
   firstName: string;

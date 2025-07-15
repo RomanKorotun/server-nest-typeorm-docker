@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { IUserEmailVerificationRepository } from 'src/modules/auth/domain/repositories/user-email-verification.repository';
-import { ConfirmEmailResponse } from './confirm-email-response.type';
+import { ConfirmEmailResponse } from './confirm-email-response.interface';
 
 @Injectable()
 export class ConfirmEmailService {

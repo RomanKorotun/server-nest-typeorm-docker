@@ -21,6 +21,7 @@ import { ResendConfirmEmailSwagger } from '../swagger/resend-confirm-email.swagg
 import { SigninRequestDto } from '../dto/signin/signin-request.dto';
 import { SigninService } from '../../application/use-cases/signin/signin.service';
 import { Response } from 'express';
+import { SigninSwagger } from '../swagger/signin.swagger';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -53,6 +54,7 @@ export class AuthController {
     return await this.resendConfirmEmailService.execute(dto);
   }
 
+  @SigninSwagger()
   @Post('signin')
   @HttpCode(HttpStatus.OK)
   async signin(

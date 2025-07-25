@@ -11,4 +11,6 @@ export const swaggerConfig = new DocumentBuilder()
     'https://github.com/RomanKorotun/server-nest-typeorm-docker',
     'roman.korotun@ukr.net',
   )
+  .addCookieAuth('accessToken')
+  .addCookieAuth('refreshToken')
   .build();

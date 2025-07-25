@@ -10,9 +10,11 @@ export class CookieService implements ICookieService {
   setAuthToken(res: Response, token: string, tokenType: TokenType): void {
     const isProd =
       this.configService.getOrThrow<string>('NODE_ENV') === 'production';
+
     const accessTokenTime = +this.configService.getOrThrow(
       'JWT_ACCESS_TOKEN_TIME',
     );
+
     const refreshTokenTime = +this.configService.getOrThrow(
       'JWT_REFRESH_TOKEN_TIME',
     );
@@ -44,6 +46,25 @@ export class CookieService implements ICookieService {
         ...tokenOptions,
         maxAge: refreshTokenTime * 1000,
       });
+    } else {
+      throw new InternalServerErrorException('Недопустимий тип токена');
+    }
+  }
+
+  clearAuthCookie(res: Response, tokenType: TokenType): void {
+    const isProd =
+      this.configService.getOrThrow<string>('NODE_ENV') === 'production';
+
+    const cookieOptions: CookieOptions = {
+      httpOnly: true,
+      secure: isProd,
+      sameSite: isProd ? 'strict' : 'lax',
+    };
+
+    if (tokenType === TokenType.ACCESS) {
+      res.clearCookie('accessToken', cookieOptions);
+    } else if (tokenType === TokenType.REFRESH) {
+      res.clearCookie('refreshToken', cookieOptions);
     } else {
       throw new InternalServerErrorException('Недопустимий тип токена');
     }

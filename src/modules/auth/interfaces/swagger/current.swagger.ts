@@ -1,5 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import {
+  ApiCookieAuth,
   ApiOkResponse,
   ApiOperation,
   ApiUnauthorizedResponse,
@@ -9,6 +10,7 @@ import { CurrentUnauthorizedResponseDto } from '../dto/current/current-unauthori
 
 export const CurrentSwagger = () => {
   return applyDecorators(
+    ApiCookieAuth('accessToken'),
     ApiOperation({
       summary: 'Повертає поточного користувача',
       description:

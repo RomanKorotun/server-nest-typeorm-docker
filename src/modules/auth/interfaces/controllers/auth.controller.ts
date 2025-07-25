@@ -31,6 +31,8 @@ import { SigninSuccessResponseDto } from '../dto/signin/signin-success-response.
 import { ConfirmEmailSuccessResponseDto } from '../dto/confirm-email/confirm-email-success-response.dto';
 import { ResendConfirmEmailSuccessResponseDto } from '../dto/resend-confirm-email/resend-confirm-email-success-response.dto';
 import { CurrentSuccessResponse } from '../dto/current/current-success_response.dto';
+import { SignoutService } from '../../application/use-cases/signout/signout.service';
+import { SignoutSwagger } from '../swagger/signout.swagger';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -38,6 +40,7 @@ export class AuthController {
   constructor(
     private readonly signupService: SignupService,
     private readonly signinService: SigninService,
+    private readonly signoutService: SignoutService,
     private readonly confirmEmailService: ConfirmEmailService,
     private readonly resendConfirmEmailService: ResendConfirmEmailService,
   ) {}
@@ -85,5 +88,13 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   current(@CurrentUser() user: DomainUser): CurrentSuccessResponse {
     return user.toCurrentUser();
+  }
+
+  @SignoutSwagger()
+  @UseGuards(JwtAccessGuard)
+  @Post('signout')
+  @HttpCode(HttpStatus.OK)
+  signout(@Res({ passthrough: true }) res: Response) {
+    return this.signoutService.execute(res);
   }
 }

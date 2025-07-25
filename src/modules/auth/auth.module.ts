@@ -13,6 +13,7 @@ import { UserRepository } from './infrastructure/persistence/repositories/user.r
 import { UserEmailVerificationRepository } from './infrastructure/persistence/repositories/user-email-verificarion.repository';
 import { TokenService } from './infrastructure/services/token.service';
 import { CookieService } from './infrastructure/services/cookie.service';
+import { SignoutService } from './application/use-cases/signout/signout.service';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CookieService } from './infrastructure/services/cookie.service';
   providers: [
     SignupService,
     SigninService,
+    SignoutService,
     { provide: 'IUserRepository', useClass: UserRepository },
     {
       provide: 'IUserEmailVerificationRepository',

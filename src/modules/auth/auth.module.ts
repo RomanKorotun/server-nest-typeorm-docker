@@ -14,6 +14,7 @@ import { UserEmailVerificationRepository } from './infrastructure/persistence/re
 import { TokenService } from './infrastructure/services/token.service';
 import { CookieService } from './infrastructure/services/cookie.service';
 import { SignoutService } from './application/use-cases/signout/signout.service';
+import { RefreshService } from './application/use-cases/refresh/refresh.service';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { SignoutService } from './application/use-cases/signout/signout.service'
     SignupService,
     SigninService,
     SignoutService,
+    RefreshService,
     { provide: 'IUserRepository', useClass: UserRepository },
     {
       provide: 'IUserEmailVerificationRepository',

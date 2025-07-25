@@ -33,6 +33,8 @@ import { ResendConfirmEmailSuccessResponseDto } from '../dto/resend-confirm-emai
 import { CurrentSuccessResponse } from '../dto/current/current-success_response.dto';
 import { SignoutService } from '../../application/use-cases/signout/signout.service';
 import { SignoutSwagger } from '../swagger/signout.swagger';
+import { RefreshService } from '../../application/use-cases/refresh/refresh.service';
+import { JwtRefreshGuard } from '../../../../common/guards/jwt-refresh.guard';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -43,6 +45,7 @@ export class AuthController {
     private readonly signoutService: SignoutService,
     private readonly confirmEmailService: ConfirmEmailService,
     private readonly resendConfirmEmailService: ResendConfirmEmailService,
+    private readonly refreshService: RefreshService,
   ) {}
 
   @SignupSwagger()
@@ -88,6 +91,17 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   current(@CurrentUser() user: DomainUser): CurrentSuccessResponse {
     return user.toCurrentUser();
+  }
+
+  @UseGuards(JwtRefreshGuard)
+  @Post('refresh')
+  @HttpCode(HttpStatus.OK)
+  refresh(
+    @CurrentUser() user: DomainUser,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const userId = user.getId();
+    return this.refreshService.execute(res, userId);
   }
 
   @SignoutSwagger()

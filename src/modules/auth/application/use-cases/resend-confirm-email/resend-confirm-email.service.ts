@@ -7,9 +7,9 @@ import {
 import { IUserRepository } from '../../../../../modules/auth/domain/repositories/user.repository';
 import { ResendConfirmEmailRequestDto } from '../../../../../modules/auth/interfaces/dto/resend-confirm-email/resend-confirm-email-request.dto';
 import { IUserEmailVerificationRepository } from '../../../../../modules/auth/domain/repositories/user-email-verification.repository';
-import { ResendConfirmEmailResponse } from './resend-confirm-email-response.interface';
 import { IEmailContent } from '../../../../../application/contracts/email-content.interface';
 import { IEmailSender } from '../../../../../application/contracts/email-sender.interface';
+import { ResendConfirmEmailSuccessResponseDto } from 'src/modules/auth/interfaces/dto/resend-confirm-email/resend-confirm-email-success-response.dto';
 
 @Injectable()
 export class ResendConfirmEmailService {
@@ -25,7 +25,7 @@ export class ResendConfirmEmailService {
 
   async execute(
     dto: ResendConfirmEmailRequestDto,
-  ): Promise<ResendConfirmEmailResponse> {
+  ): Promise<ResendConfirmEmailSuccessResponseDto> {
     const { email } = dto;
     const user = await this.userRepository.findByEmail(email);
 

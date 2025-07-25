@@ -6,6 +6,7 @@ import { IPasswordHashService } from '../../contracts/password-hash-service.inte
 import { ITokenService } from '../../contracts/token-service.interface';
 import { TokenType } from '../../../../../modules/auth/enums/token-type.enum';
 import { ICookieService } from '../../contracts/cookie-service.interface';
+import { SigninSuccessResponseDto } from 'src/modules/auth/interfaces/dto/signin/signin-success-response.dto';
 
 @Injectable()
 export class SigninService {
@@ -20,7 +21,10 @@ export class SigninService {
     private readonly cookieService: ICookieService,
   ) {}
 
-  async execute(dto: SigninRequestDto, res: Response) {
+  async execute(
+    dto: SigninRequestDto,
+    res: Response,
+  ): Promise<SigninSuccessResponseDto> {
     const { email, password } = dto;
     const user = await this.userRepository.findByEmail(email);
 
@@ -49,9 +53,10 @@ export class SigninService {
 
     const id = user.getId();
     const firstName = user.getFirstName();
+    const lastName = user.getLastName();
 
     return {
-      user: { id, firstName, email },
+      user: { id, firstName, lastName, email },
       message:
         'Аутентифікаця успішна. Access Token i Refresh Token встановлені в cookies',
     };

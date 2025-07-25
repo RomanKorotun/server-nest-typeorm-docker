@@ -17,11 +17,24 @@ export class DomainUser {
     return this.firstName;
   }
 
+  getLastName() {
+    return this.lastName;
+  }
+
   getEmail() {
     return this.email;
   }
 
   getPassword() {
     return this.password;
+  }
+
+  toCurrentUser() {
+    return {
+      id: this.getId(),
+      firstName: this.getFirstName(),
+      lastName: this.getLastName(),
+      email: this.getEmail(),
+    };
   }
 }

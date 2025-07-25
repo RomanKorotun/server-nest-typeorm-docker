@@ -2,11 +2,11 @@ import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { SignupRequestDto } from '../../../interfaces/dto/signup/signup-request.dto';
 import { IUserRepository } from '../../../domain/repositories/user.repository';
 import { IUserEmailVerificationRepository } from '../../../domain/repositories/user-email-verification.repository';
-import { SignupResponse } from './signup-response.interface';
 import { ICodeGenerator } from '../../../../../application/contracts/code-generator.interface';
 import { IEmailContent } from '../../../../../application/contracts/email-content.interface';
 import { IEmailSender } from '../../../../../application/contracts/email-sender.interface';
 import { IPasswordHashService } from '../../contracts/password-hash-service.interface';
+import { SignupSuccessResponseDto } from 'src/modules/auth/interfaces/dto/signup/signup-success-response.dto';
 
 @Injectable()
 export class SignupService {
@@ -25,7 +25,7 @@ export class SignupService {
     private readonly emailSenderService: IEmailSender,
   ) {}
 
-  async execute(dto: SignupRequestDto): Promise<SignupResponse> {
+  async execute(dto: SignupRequestDto): Promise<SignupSuccessResponseDto> {
     const { email, password, firstName } = dto;
 
     const user = await this.userRepository.findByEmail(email);

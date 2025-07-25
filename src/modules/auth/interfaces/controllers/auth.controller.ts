@@ -13,7 +13,6 @@ import { ApiTags } from '@nestjs/swagger';
 import { SignupService } from '../../application/use-cases/signup/signup.service';
 import { SignupSwagger } from '../swagger/signup.swagger';
 import { SignupRequestDto } from '../dto/signup/signup-request.dto';
-import { SignupResponse } from '../../application/use-cases/signup/signup-response.interface';
 import { ConfirmEmailService } from '../../application/use-cases/confirm-email/confirm-email.service';
 import { ConfirmEmailSwagger } from '../swagger/confirm-email.swagger';
 import { ResendConfirmEmailRequestDto } from '../dto/resend-confirm-email/resend-confirm-email-request.dto';
@@ -26,6 +25,12 @@ import { SigninSwagger } from '../swagger/signin.swagger';
 import { CurrentUser } from '../../decorators/current-user.decorator';
 import { DomainUser } from '../../domain/entities/user';
 import { JwtAccessGuard } from '../../../../common/guards/jwt-access.guard';
+import { CurrentSwagger } from '../swagger/current.swagger';
+import { SignupSuccessResponseDto } from '../dto/signup/signup-success-response.dto';
+import { SigninSuccessResponseDto } from '../dto/signin/signin-success-response.dto';
+import { ConfirmEmailSuccessResponseDto } from '../dto/confirm-email/confirm-email-success-response.dto';
+import { ResendConfirmEmailSuccessResponseDto } from '../dto/resend-confirm-email/resend-confirm-email-success-response.dto';
+import { CurrentSuccessResponse } from '../dto/current/current-success_response.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -40,21 +45,27 @@ export class AuthController {
   @SignupSwagger()
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
-  async signup(@Body() dto: SignupRequestDto): Promise<SignupResponse> {
+  async signup(
+    @Body() dto: SignupRequestDto,
+  ): Promise<SignupSuccessResponseDto> {
     return await this.signupService.execute(dto);
   }
 
   @ConfirmEmailSwagger()
   @Get('confirm-email/:verificationCode')
   @HttpCode(HttpStatus.OK)
-  async confirmEmail(@Param('verificationCode') verificationCode: string) {
+  async confirmEmail(
+    @Param('verificationCode') verificationCode: string,
+  ): Promise<ConfirmEmailSuccessResponseDto> {
     return await this.confirmEmailService.execute(verificationCode);
   }
 
   @ResendConfirmEmailSwagger()
   @Post('confirm-email/resend')
   @HttpCode(HttpStatus.OK)
-  async resendConfirmEmail(@Body() dto: ResendConfirmEmailRequestDto) {
+  async resendConfirmEmail(
+    @Body() dto: ResendConfirmEmailRequestDto,
+  ): Promise<ResendConfirmEmailSuccessResponseDto> {
     return await this.resendConfirmEmailService.execute(dto);
   }
 
@@ -64,14 +75,15 @@ export class AuthController {
   async signin(
     @Body() dto: SigninRequestDto,
     @Res({ passthrough: true }) res: Response,
-  ) {
+  ): Promise<SigninSuccessResponseDto> {
     return this.signinService.execute(dto, res);
   }
 
+  @CurrentSwagger()
   @UseGuards(JwtAccessGuard)
   @Get('current')
   @HttpCode(HttpStatus.OK)
-  current(@CurrentUser() user: DomainUser) {
-    return user;
+  current(@CurrentUser() user: DomainUser): CurrentSuccessResponse {
+    return user.toCurrentUser();
   }
 }

@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { IUserEmailVerificationRepository } from 'src/modules/auth/domain/repositories/user-email-verification.repository';
-import { ConfirmEmailResponse } from './confirm-email-response.interface';
+import { ConfirmEmailSuccessResponseDto } from 'src/modules/auth/interfaces/dto/confirm-email/confirm-email-success-response.dto';
 
 @Injectable()
 export class ConfirmEmailService {
@@ -8,7 +8,9 @@ export class ConfirmEmailService {
     @Inject('IUserEmailVerificationRepository')
     private readonly userEmailVerificationRepository: IUserEmailVerificationRepository,
   ) {}
-  async execute(verificationCode: string): Promise<ConfirmEmailResponse> {
+  async execute(
+    verificationCode: string,
+  ): Promise<ConfirmEmailSuccessResponseDto> {
     const verification =
       await this.userEmailVerificationRepository.findByVerificationCode(
         verificationCode,

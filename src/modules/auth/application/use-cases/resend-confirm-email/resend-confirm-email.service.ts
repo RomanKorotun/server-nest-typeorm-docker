@@ -10,9 +10,10 @@ import { IUserEmailVerificationRepository } from '../../../../../modules/auth/do
 import { IEmailContent } from '../../../../../application/contracts/email-content.interface';
 import { IEmailSender } from '../../../../../application/contracts/email-sender.interface';
 import { ResendConfirmEmailSuccessResponseDto } from 'src/modules/auth/interfaces/dto/resend-confirm-email/resend-confirm-email-success-response.dto';
+import { IResendConfirmEmail } from '../../contracts/resend-confirm-email-service.interface';
 
 @Injectable()
-export class ResendConfirmEmailService {
+export class ResendConfirmEmailService implements IResendConfirmEmail {
   constructor(
     @Inject('IUserRepository') private readonly userRepository: IUserRepository,
     @Inject('IUserEmailVerificationRepository')

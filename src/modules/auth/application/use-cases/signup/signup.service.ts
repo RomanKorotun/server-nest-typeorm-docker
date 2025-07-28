@@ -7,9 +7,10 @@ import { IEmailContent } from '../../../../../application/contracts/email-conten
 import { IEmailSender } from '../../../../../application/contracts/email-sender.interface';
 import { IPasswordHashService } from '../../contracts/password-hash-service.interface';
 import { SignupSuccessResponseDto } from 'src/modules/auth/interfaces/dto/signup/signup-success-response.dto';
+import { ISignupService } from '../../contracts/signup-service.interface';
 
 @Injectable()
-export class SignupService {
+export class SignupService implements ISignupService {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,

@@ -7,9 +7,10 @@ import { ITokenService } from '../../contracts/token-service.interface';
 import { TokenType } from '../../../../../modules/auth/enums/token-type.enum';
 import { ICookieService } from '../../contracts/cookie-service.interface';
 import { SigninSuccessResponseDto } from 'src/modules/auth/interfaces/dto/signin/signin-success-response.dto';
+import { ISigninService } from '../../contracts/signin-service.interface';
 
 @Injectable()
-export class SigninService {
+export class SigninService implements ISigninService {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,

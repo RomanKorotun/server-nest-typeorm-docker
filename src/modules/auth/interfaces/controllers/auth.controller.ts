@@ -35,6 +35,7 @@ import { SignoutService } from '../../application/use-cases/signout/signout.serv
 import { SignoutSwagger } from '../swagger/signout.swagger';
 import { RefreshService } from '../../application/use-cases/refresh/refresh.service';
 import { JwtRefreshGuard } from '../../../../common/guards/jwt-refresh.guard';
+import { RefreshSwagger } from '../swagger/refresh.swagger';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -93,6 +94,7 @@ export class AuthController {
     return user.toCurrentUser();
   }
 
+  @RefreshSwagger()
   @UseGuards(JwtRefreshGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)

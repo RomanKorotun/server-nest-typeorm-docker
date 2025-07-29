@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { UserEntity } from '../../persistence/entities/user.entity';
 import { IUserRepository } from '../../../domain/repositories/user.repository';
 import { DomainUser } from '../../../domain/entities/user';
-import { CreateUserProps } from 'src/modules/auth/domain/types/create-user.props';
+import { CreateUserProps } from '../../../../../modules/auth/domain/types/create-user.props';
 import { UpdateUserRoleProps } from 'src/modules/admin/domain/types/update-user.props';
+import { Role } from '../../../../../common/enums/role.enum';
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -74,5 +75,38 @@ export class UserRepository implements IUserRepository {
     Object.assign(userEntity, dto);
     const saved = await this.userRepo.save(userEntity);
     return this.mapToDomain(saved);
+  }
+
+  async findAll(
+    role: Role,
+    page: number,
+    limit: number,
+  ): Promise<DomainUser[]> {
+    const skip = (page - 1) * limit;
+
+    if (role === Role.SUPER_ADMIN) {
+      const users = await this.userRepo.find({ skip, take: limit });
+      return users.map((user) => this.mapToDomain(user));
+    }
+
+    if (role === Role.ADMIN) {
+      const users = await this.userRepo.find({
+        where: { role: Not(Role.SUPER_ADMIN) },
+        skip,
+        take: limit,
+      });
+      return users.map((user) => this.mapToDomain(user));
+    }
+
+    if (role === Role.MODERATOR) {
+      const users = await this.userRepo.find({
+        where: { role: Role.USER },
+        skip,
+        take: limit,
+      });
+      return users.map((user) => this.mapToDomain(user));
+    }
+
+    return [];
   }
 }

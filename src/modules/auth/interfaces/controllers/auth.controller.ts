@@ -22,7 +22,6 @@ import { SigninRequestDto } from '../dto/signin/signin-request.dto';
 import { SigninService } from '../../application/use-cases/signin/signin.service';
 import { Response } from 'express';
 import { SigninSwagger } from '../swagger/signin.swagger';
-import { CurrentUser } from '../../decorators/current-user.decorator';
 import { DomainUser } from '../../domain/entities/user';
 import { JwtAccessGuard } from '../../../../common/guards/jwt-access.guard';
 import { CurrentSwagger } from '../swagger/current.swagger';
@@ -36,6 +35,7 @@ import { SignoutSwagger } from '../swagger/signout.swagger';
 import { RefreshService } from '../../application/use-cases/refresh/refresh.service';
 import { JwtRefreshGuard } from '../../../../common/guards/jwt-refresh.guard';
 import { RefreshSwagger } from '../swagger/refresh.swagger';
+import { CurrentUser } from '../../../../common/decorators/current-user.decorator';
 
 @ApiTags('auth')
 @Controller('auth')

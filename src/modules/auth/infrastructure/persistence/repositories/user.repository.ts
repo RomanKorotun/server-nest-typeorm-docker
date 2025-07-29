@@ -85,7 +85,11 @@ export class UserRepository implements IUserRepository {
     const skip = (page - 1) * limit;
 
     if (role === Role.SUPER_ADMIN) {
-      const users = await this.userRepo.find({ skip, take: limit });
+      const users = await this.userRepo.find({
+        skip,
+        take: limit,
+        order: { createdAt: 'DESC' },
+      });
       return users.map((user) => this.mapToDomain(user));
     }
 
@@ -94,6 +98,7 @@ export class UserRepository implements IUserRepository {
         where: { role: Not(Role.SUPER_ADMIN) },
         skip,
         take: limit,
+        order: { createdAt: 'DESC' },
       });
       return users.map((user) => this.mapToDomain(user));
     }
@@ -103,6 +108,7 @@ export class UserRepository implements IUserRepository {
         where: { role: Role.USER },
         skip,
         take: limit,
+        order: { createdAt: 'DESC' },
       });
       return users.map((user) => this.mapToDomain(user));
     }

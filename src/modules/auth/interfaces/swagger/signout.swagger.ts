@@ -22,7 +22,7 @@ export const SignoutSwagger = () => {
     ApiUnauthorizedResponse({
       type: SignoutUnauthorizedResponseDto,
       description:
-        'Користувач неавторизований або надано недійсний токен доступу',
+        'Користувач не аутентифікований (не передано або недійсний токен)',
     }),
   );
 };

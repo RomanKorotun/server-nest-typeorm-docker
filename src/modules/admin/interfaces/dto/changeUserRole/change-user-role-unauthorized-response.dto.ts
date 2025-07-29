@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ChangeUserRoleForbiddenResponseDto {
-  @ApiProperty({ description: 'HTTP статус відповіді', example: 403 })
+export class ChangeUserRoleUnauthorizedResponseDto {
+  @ApiProperty({ description: 'HTTP статус відповіді', example: 401 })
   status: number;
 
   @ApiProperty({
     description: 'Текст помилки',
-    example: 'Role може змінювати лише SUPER_ADMIN',
+    example: 'Unauthorized',
   })
   message: string;
 

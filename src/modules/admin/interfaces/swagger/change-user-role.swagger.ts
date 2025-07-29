@@ -5,9 +5,11 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiParam,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { ChangeUserRoleSuccessResponseDto } from '../dto/changeUserRole/change-user-role-success-response.dto';
 import { ChangeUserRoleForbiddenResponseDto } from '../dto/changeUserRole/change-user-role-forbidden-response.dto';
+import { ChangeUserRoleUnauthorizedResponseDto } from '../dto/changeUserRole/change-user-role-unauthorized-response.dto';
 
 export const ChangeUserRoleSwagger = () => {
   return applyDecorators(
@@ -21,6 +23,11 @@ export const ChangeUserRoleSwagger = () => {
     ApiOkResponse({
       type: ChangeUserRoleSuccessResponseDto,
       description: 'Роль користувача успішно змінено.',
+    }),
+    ApiUnauthorizedResponse({
+      type: ChangeUserRoleUnauthorizedResponseDto,
+      description:
+        'Користувач не аутентифікований (не передано або недійсний токен)',
     }),
     ApiForbiddenResponse({
       type: ChangeUserRoleForbiddenResponseDto,

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ChangeUserRoleForbiddenResponseDto {
+export class FindAllUsersForbiddenResponseDto {
   @ApiProperty({ description: 'HTTP статус відповіді', example: 403 })
   status: number;
 
@@ -12,7 +12,7 @@ export class ChangeUserRoleForbiddenResponseDto {
 
   @ApiProperty({
     description: 'URL, на який був зроблений запит',
-    example: '/api/admin/users/ca0f9c41-717c-498c-bfab-d15ad916489f/role',
+    example: '/api/admin/users',
   })
   url: string;
 

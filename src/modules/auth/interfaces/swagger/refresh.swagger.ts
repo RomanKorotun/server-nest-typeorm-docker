@@ -24,7 +24,7 @@ export const RefreshSwagger = () => {
     ApiUnauthorizedResponse({
       type: RefreshUnauthorizedResponseDto,
       description:
-        'Користувач не авторизований: відсутній або недійсний refresh токен',
+        'Користувач не аутентифікований (не передано або недійсний токен)',
     }),
   );
 };

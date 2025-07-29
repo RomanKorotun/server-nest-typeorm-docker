@@ -30,7 +30,7 @@ export class RolesGuard implements CanActivate {
     const userRole = user.getRole();
 
     if (!roles.includes(userRole)) {
-      throw new ForbiddenException('Ролі може змінювати лише SUPER_ADMIN');
+      throw new ForbiddenException('Role може змінювати лише SUPER_ADMIN');
     }
 
     return true;

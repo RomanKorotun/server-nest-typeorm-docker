@@ -22,6 +22,7 @@ import { ChangeUserRoleSwagger } from '../swagger/change-user-role.swagger';
 import { DomainUser } from '../../../../modules/auth/domain/entities/user';
 import { CurrentUser } from '../../../../common/decorators/current-user.decorator';
 import { FindAllUsersService } from '../../application/use-cases/findAllUsers/find-all-users.service';
+import { FindAllUsersSwagger } from '../swagger/find-all-users.swagger';
 
 @ApiTags('admin')
 @Controller('admin')
@@ -35,7 +36,7 @@ export class AdminController {
   @Roles(Role.SUPER_ADMIN)
   @UseGuards(JwtAccessGuard, RolesGuard)
   @HttpCode(HttpStatus.OK)
-  @Patch('user/:id/role')
+  @Patch('users/:id/role')
   async changeUserRole(
     @Param('id') id: string,
     @Body() dto: ChangeUserRoleRequestDto,
@@ -43,6 +44,7 @@ export class AdminController {
     return await this.changeUserRoleService.execute(id, dto);
   }
 
+  @FindAllUsersSwagger()
   @Roles(Role.SUPER_ADMIN, Role.ADMIN, Role.MODERATOR)
   @UseGuards(JwtAccessGuard, RolesGuard)
   @HttpCode(HttpStatus.OK)

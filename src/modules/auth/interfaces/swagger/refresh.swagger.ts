@@ -1,5 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import {
+  ApiCookieAuth,
   ApiOkResponse,
   ApiOperation,
   ApiUnauthorizedResponse,
@@ -9,6 +10,7 @@ import { RefreshUnauthorizedResponseDto } from '../dto/refresh/refresh-unauthori
 
 export const RefreshSwagger = () => {
   return applyDecorators(
+    ApiCookieAuth('refreshToken'),
     ApiOperation({
       summary: 'Видає нові access та refresh токени',
       description:

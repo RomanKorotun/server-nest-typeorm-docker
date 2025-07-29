@@ -55,9 +55,10 @@ export class SigninService implements ISigninService {
     const id = user.getId();
     const firstName = user.getFirstName();
     const lastName = user.getLastName();
+    const role = user.getRole();
 
     return {
-      user: { id, firstName, lastName, email },
+      user: { id, firstName, lastName, email, role },
       message:
         'Аутентифікаця успішна. Access Token i Refresh Token встановлені в cookies',
     };

@@ -13,6 +13,9 @@ export class UserInfoResponseDto {
   @ApiProperty({ description: 'Прізвище користувача', example: 'Коротун' })
   lastName: string;
 
-  @ApiProperty({ description: 'Email користувача' })
+  @ApiProperty({ description: 'Email користувача', example: 'roman@ukr.net' })
   email: string;
+
+  @ApiProperty({ description: 'Role користувача', example: 'user' })
+  role: string;
 }

@@ -5,6 +5,7 @@ import { DatabaseModule } from './infrastructure/database/database.module';
 import { EmailModule } from './infrastructure/email/email.module';
 import { JwtConfigModule } from './infrastructure/jwt-config/jwt-config.module';
 import { AuthenticationStrategiesModule } from './infrastructure/authentication-strategies/authentication-strategies.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AuthenticationStrategiesModule } from './infrastructure/authentication-
     AuthenticationStrategiesModule,
     EmailModule,
     AuthModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

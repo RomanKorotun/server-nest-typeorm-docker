@@ -1,3 +1,5 @@
+import { Role } from 'src/common/enums/role.enum';
+
 export class DomainUser {
   constructor(
     private readonly id: string,
@@ -5,6 +7,7 @@ export class DomainUser {
     private readonly lastName: string,
     private readonly email: string,
     private readonly password: string,
+    private readonly role: Role,
     private readonly createdAt: Date,
     private readonly updatedAt: Date,
   ) {}
@@ -29,12 +32,25 @@ export class DomainUser {
     return this.password;
   }
 
+  getRole(): Role {
+    return this.role;
+  }
+
+  getCreatedAt() {
+    return this.createdAt;
+  }
+
+  getUpdatedAt() {
+    return this.updatedAt;
+  }
+
   toCurrentUser() {
     return {
       id: this.getId(),
       firstName: this.getFirstName(),
       lastName: this.getLastName(),
       email: this.getEmail(),
+      role: this.getRole(),
     };
   }
 }

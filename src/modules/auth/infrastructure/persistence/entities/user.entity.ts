@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserEmailVerificationEntity } from './user-email-verification.entity';
+import { Role } from '../../../../../common/enums/role.enum';
 
 @Unique('users_email_uq', ['email'])
 @Entity({ name: 'users' })
@@ -26,6 +27,9 @@ export class UserEntity {
 
   @Column({ type: 'varchar', length: 125 })
   password: string;
+
+  @Column({ type: 'enum', enum: Role, default: Role.USER })
+  role: Role;
 
   @OneToOne(
     () => UserEmailVerificationEntity,

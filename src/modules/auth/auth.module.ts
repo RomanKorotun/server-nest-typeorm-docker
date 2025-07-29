@@ -38,5 +38,6 @@ import { RefreshService } from './application/use-cases/refresh/refresh.service'
     ConfirmEmailService,
     ResendConfirmEmailService,
   ],
+  exports: ['IUserRepository'],
 })
 export class AuthModule {}
